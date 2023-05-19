@@ -179,8 +179,8 @@ country_choice = col2.selectbox("Quốc gia", (new_df["Country"].unique()))
 
 
 #----------------------------------------------------------
-new_df = df[new_df["Country"] != "Russia🇷🇺"]
-new_df = df[new_df["Country"] != "Australia🇦🇺"]
+new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
+new_df_KNN = df[df["Country"] != "Australia🇦🇺"]
 
 
 
