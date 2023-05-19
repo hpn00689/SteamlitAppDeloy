@@ -46,7 +46,9 @@ df = pd.read_csv('app_build/analysis_df_employee.csv')
 st.dataframe(df)
 
 st.info("Ngoài bộ dữ liệu được khảo sát, nhóm còn tìm thêm một bộ dữ liệu con về các vai trò công việc trong lĩnh vực DS/ML với mức lương cơ bản của nó trong khoảng từ năm 2020 - 2021 để bổ sung phân tích cho toàn bộ bài làm của nhóm. Được lấy trên trang: https://www.kaggle.com/datasets/ruchi798/data-science-job-salaries", icon="🔥")
-df_title_job = pd.read_csv('analysis_title_salary.csv')
+# df_title_job = pd.read_csv('analysis_title_salary.csv')
+df_title_job = pd.read_csv('app_build/analysis_title_salary.csv')
+
 st.dataframe(df_title_job)
 
 #-------------------------------------------------------
@@ -63,6 +65,7 @@ st.write("""**🧑‍💻️ Tên ứng dụng**: Web app phân tích tình hìn
 
 # df_non_tech = pd.read_csv("analysis_df.csv")
 df_non_tech = pd.read_csv("app_build/analysis_df.csv")
+
 st.session_state.df = df
 st.session_state.df_non_tech = df_non_tech
 st.session_state.df_title_job = df_title_job
