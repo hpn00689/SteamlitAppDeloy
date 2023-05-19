@@ -222,8 +222,6 @@ not_employee_paper = df_non_tech['Published Papers'].value_counts().to_frame() -
 employee_paper.reset_index(inplace=True)
 not_employee_paper.reset_index(inplace=True)
 
-st.write(employee_paper)
-
 fig = make_subplots(rows=1,cols=2,
                     specs=[[{"type": "pie"}, {"type": "pie"}]],
                     subplot_titles=("Employee","Unemployment"))
@@ -278,7 +276,7 @@ fig4.update_layout(
 
 st.plotly_chart(fig4, use_container_width= True, height = 800)
 
-st.info("""**Nhận xét:** 
+st.info("""**Nhận xét:** Với biểu đồ cột thứ nhất, ta có thể nhận ra được rằng kinh nghiệm code càng nhiều thì người đó có mức lương càng cao (trên 30.000 đô). Ngược lại với điều đó thì số người có kinh nghiệm code ít hơn một năm sẽ có mức lương khoảng 6.734 đô đổi lại. Biểu đồ hình tròn bổ sung thêm cho ta thấy được phần trăm người có kinh nghiệm code ít hơn một năm chiếm phần lớn (hơn 50%), vậy với ngành DS/ML nói chung, nhân lực trẻ rất là dồi dào, nhưng ngược lại thì nhân lực có kinh nghiệm rất ít. Có lẽ vì vậy mà nhìn chung, mức lương ngành này chỉ cao khi có đủ kinh nghiệm, bình thường thì không cao lắm.
 """, icon="ℹ️")
 
 # -----
