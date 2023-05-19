@@ -15,6 +15,15 @@ st.set_page_config(
     layout="wide"
 )
 
+if "df" or "df_non_tech" or "df_title_job" not in st.session_state:
+    df = pd.read_csv('app_build/analysis_df_employee.csv')
+    df_non_tech = pd.read_csv('app_build/analysis_df.csv')
+    df_title_job = pd.read_csv('app_build/analysis_title_salary.csv')
+
+df = st.session_state.df
+df_non_tech = st.session_state.df_non_tech
+df_title_job = st.session_state.df_title_job
+
 # Tạo tiêu đề -----------------------------------------
 col1, col2, col3 = st.columns([1,5,1])
 
@@ -27,5 +36,79 @@ with col2:
 with col3:
     st.write("")
 
-    
+# Tiền xử lý dữ liệu -----------------------------------
+new_df = df[["Age", "Gender", "Salary", "Title", "Formal Education", "Coding Experience", "ML Experience", "Country", "Year"]]
+new_df = new_df[new_df["Country"] != "Russia🇷🇺"]
+new_df = new_df[new_df["Country"] != "Australia🇦🇺"]
 
+new_df = new_df.dropna()
+
+# Xử lý cột tuổi:- --------------------------------------
+new_df["Age"] = new_df["Age"].apply(lambda x: x.replace("+", "")).apply(lambda x: sum(map(lambda i: int(i), x.split("-"))) / len(x.split("-")))
+
+# Xử lý cột Gender:--------------------------------------
+gender_list = new_df["Gender"].unique()
+gender_map = {gender: idx for gender, idx in zip(list(gender_list), range(1, len(list(gender_list)) + 1))}
+
+new_df["Gender"] = new_df["Gender"].map(gender_map)
+
+# Xử lý cột Title:---------------------------------------
+title_list = new_df["Title"].unique()
+title_map = {title: idx for title, idx in zip(list(title_list), range(1, len(list(title_list)) + 1))}
+new_df["Title"] = new_df["Title"].map(title_map)
+
+# Xử lý cột Formal Education:----------------------------
+education_list = new_df["Formal Education"].unique()
+education_map = {education: idx for education, idx in zip(list(education_list), [10, 7, 20, 30, 3, 15, 8])}
+new_df["Formal Education"] = new_df["Formal Education"].map(education_map)
+
+# Xử lý cột Coding Experience:---------------------------  
+pattern = r'\b([0-9]+)\b'
+exp_list = new_df["Coding Experience"].unique()
+
+exp_numeric = []
+
+for exp in exp_list:
+    matches = re.findall(pattern, exp)
+    numbers = [int(match[:2]) for match in matches]
+    if not numbers:
+        numbers = [0]
+    exp_numeric.append(numbers)
+
+exp_map = {k: sum(v) / len(v) for k, v in zip(list(exp_list), exp_numeric)}
+
+new_df["Coding Experience"] = new_df["Coding Experience"].map(exp_map)
+
+# Xử lý cột ML Experience:-------------------------------
+ml_list = new_df["ML Experience"].unique()
+ml_numeric = []
+
+for ml in ml_list:
+    matches = re.findall(pattern, ml)
+    numbers = [int(match[:2]) for match in matches]
+    if not numbers:
+        numbers = [0]
+    ml_numeric.append(numbers)
+
+ml_map = {k: sum(v) / len(v) for k, v in zip(list(ml_list), ml_numeric)}
+
+new_df["ML Experience"] = new_df["ML Experience"].map(ml_map)
+
+# Xử lý cột Country:-------------------------------------
+country_list = new_df["Country"].unique()
+country_map = {k: v for k, v in zip(list(country_list), [5, 20, 18, 15])}
+new_df["Country"] = new_df["Country"].map(country_map)
+
+# Chia tập dữ liệu thành train và test:------------------
+X = new_df.drop("Salary", axis=1)
+y = new_df["Salary"]
+
+X = X.to_numpy()
+y = y.to_numpy()
+y = zscore(y)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+# ----
+st.markdown("<h3 style='text-align: center;'>BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
