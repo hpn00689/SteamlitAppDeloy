@@ -14,9 +14,10 @@ df = st.session_state.df
 df_non_tech = st.session_state.df_non_tech
 df_title_job = st.session_state.df_title_job
 
-# if "df" or "df_non_tech" not in st.session_state:
-#     df = pd.read_csv('app_build/analysis_df_employee.csv')
-#     df_non_tech = pd.read_csv('app_build/analysis_df.csv')
+if "df" or "df_non_tech" not in st.session_state:
+    df = pd.read_csv('app_build/analysis_df_employee.csv')
+    df_non_tech = pd.read_csv('app_build/analysis_df.csv')
+    df_title_job = pd.read_csv('app_build/analysis_title_salary.csv')
 
 # Tạo tiêu đề -----------------------------------------
 
