@@ -348,7 +348,7 @@ st.info("""**Giải pháp cho sự mất cân bằng giới tính trong ngành n
 
 # -----
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("#### 6. ")
+st.markdown("#### 6. Mối quan hệ giữa mức lương và ngành nghề:")
 
 title_counts = df['Title'].value_counts().reset_index()
 title_counts.columns = ['Title', 'Distribution']
@@ -389,7 +389,6 @@ fig_scatter6.update_layout(
 st.plotly_chart(fig_scatter6, use_container_width=True)
 
 st.info("""**Nhận xét**: 
-- Sinh viên có số lượng cao nhất trong tất cả các ngành nghề, trong khi số lượng data journalist thì thấp nhất.
-- Kỹ sư Máy học (Machine Learning Engineer) có mức lương trung bình cao nhất, trong khi quản trị viên dữ liệu (Data Administrator) có mức lương trung bình thấp nhất.
-- Nhà khoa học dữ liệu không chỉ là một trong những ngành nghề phổ biến nhất mà còn cung cấp mức lương rất cao.
+- Data Scientist có số lượng cao nhất trong tất cả các ngành nghề, trong khi số lượng Data Journalist thì thấp nhất. Tuy nhiên, Data Scientist có mức lương có thể gọi là thấp (tầm 110000$), có lẽ vì quá nhiều nhân lực nên mức lương của ngành nghề này bị giảm xuống.
+- Product/Project Manager có mức lương trung bình cao nhất, trong khi Data Architect có mức lương trung bình thấp nhất. Điều này có thể là do Data Architect là một ngành nghề mới, nên mức lương trung bình của nó còn thấp.
 """, icon="ℹ️")
