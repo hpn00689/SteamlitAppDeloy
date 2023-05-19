@@ -152,7 +152,9 @@ col2.metric(
 )
 
 # Thử tạo mẫu dữ liệu -----------------------------------
+st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>TẠO MẪU DỮ LIỆU</h3>", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
 
 # ----
 col1, col2, col3 = st.columns(3) 
@@ -162,6 +164,12 @@ age_choice = col1.slider("Tuổi", min_value=18, max_value=60, value=30, step=1)
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
 title_choice = col3.selectbox("Vị trí/vai trò", (new_df["Title"].unique()))
+
+education_choice = col1.selectbox("Bằng cấp", (new_df["Formal Education"].unique()))
+
+
+
+
 
 
 
