@@ -340,9 +340,56 @@ st.info("""**Nhận xét**:
 - Manager là lĩnh vực công việc mà tỉ lệ nam vượt trội nhất so với nữ.
 """, icon="ℹ️")
 
-st.info("""**Giải pháp cho sự mất câng bằng giới tính trong ngành nghề DS/ML**:
+st.info("""**Giải pháp cho sự mất cân bằng giới tính trong ngành nghề DS/ML**:
 - Đãi ngộ công việc tốt cho nữ giới, đặc biệt là những người có gia đình, ví dụ như cho phép làm việc từ xa, có chế độ nghỉ thai sản, nghỉ việc khi có con nhỏ... điều này sẽ giúp cho nữ giới có thể làm việc lâu dài hơn trong ngành nghề này.
 - Tạo điều kiện cho nữ giới có thể thăng tiến trong công việc, ví dụ như tạo điều kiện cho nữ giới có thể tham gia vào các dự án lớn, có thể tham gia vào các quyết định lớn trong công ty, có thể thăng tiến lên các vị trí quản lý... điều này sẽ giúp cho nữ giới có thể có thêm động lực để tiếp tục làm việc trong ngành nghề này.
-- Tạo điều kiện cho nữ giới có thể tham gia vào các dự án nghiên cứu, phát triển, đào tạo... 
-- Chế độ thăm khám sức khỏe định kỳ cho nhân viên, đặc biệt là những nhân viên nữ giới.
-""", )
+- Chế độ thăm khám sức khỏe tâm lý định kỳ cho nhân viên, đặc biệt là những nhân viên nữ giới.
+""", icon="❓")
+
+# -----
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("#### 6. ")
+
+title_counts = df['Title'].value_counts().reset_index()
+title_counts.columns = ['Title', 'Distribution']
+
+avg_salary = df.groupby('Title')['Salary'].mean().reset_index()
+
+color_palette = ['#FF5733', '#FFC300', '#900C3F', '#008080', '#2ECC71', '#3498DB', '#9B59B6', '#F1948A',
+                 '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF', '#C0C0C0', '#808080',
+                 '#800000', '#808000', '#008000', '#800080', '#008080', '#000080', '#FFFFF0', '#F0FFF0',
+                 '#F0FFFF', '#FFFAF0', '#F5F5DC', '#FAEBD7', '#FFEFD5', '#FFE4B5', '#FFE4C4']
+
+hover_text = [
+    f"{title_counts['Title'][i]}<br>Average Salary: {avg_salary['Salary'][i]:.2f}K<br>Distribution: {title_counts['Distribution'][i]}"
+    for i in range(len(title_counts))
+]
+
+fig_scatter6 = go.Figure(data=go.Scatter(
+    x=title_counts['Distribution'],
+    y=avg_salary['Salary'],
+    mode='markers',
+    text=hover_text,
+    hoverinfo='text',
+    marker=dict(
+        size=10,
+        color=color_palette,
+        opacity=0.8,
+        line=dict(width=0.5, color='black')
+    )
+))
+
+fig_scatter6.update_layout(
+    title='Job Title Distribution vs Average Salary',
+    xaxis_title='Distribution',
+    yaxis_title='Average Salary',
+    hovermode='closest',
+)
+
+st.plotly_chart(fig_scatter6, use_container_width=True)
+
+st.info("""**Nhận xét**: 
+- Sinh viên có số lượng cao nhất trong tất cả các ngành nghề, trong khi số lượng data journalist thì thấp nhất.
+- Kỹ sư Máy học (Machine Learning Engineer) có mức lương trung bình cao nhất, trong khi quản trị viên dữ liệu (Data Administrator) có mức lương trung bình thấp nhất.
+- Nhà khoa học dữ liệu không chỉ là một trong những ngành nghề phổ biến nhất mà còn cung cấp mức lương rất cao.
+""", icon="ℹ️")
