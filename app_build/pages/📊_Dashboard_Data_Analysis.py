@@ -334,8 +334,15 @@ fig5.update_layout(
 
 st.plotly_chart(fig5, use_container_width= True, height = 800)
 
-st.info("""**Nhận xét: 
-- Trong cả top 10 ngành nghề hot nhất, tỉ lệ nhân viên nam đều vượt trội hơn nhiều so với tỉ lệ nhân viên nữ (trung bình gấp ít nhất 5 lần).
+st.info("""**Nhận xét**: 
+- Trong cả top 10 ngành nghề hot nhất, tỉ lệ nhân viên nam đều vượt trội hơn nhiều so với tỉ lệ nhân viên nữ (trung bình gấp ít nhất 5 lần). Điều này cho thấy ngành nghề DS/ML là một ngành nghề có tỉ lệ nam nữ mất cân đối nhất trong số các ngành nghề khác, có lẽ về vấn đề về sức khỏe (việc ngồi máy tính nhiều, ít vận động) hay vấn đề về tâm lý (việc kéo dài với cường độ cao gây stress nặng), gia đình... đã làm tỷ lệ nữ giới giảm đi đáng kể.
 - Tuy nhiên, đối với công việc giáo viên/giáo sư (Teacher/Professor), tỉ lệ nam nữ khá cân đối khi tỉ lệ giáo viên nữ chỉ thua giáo viên nam khoảng hơn 10%. Vì đặc thù công việc này là truyền đạt kiến thức, nên có thể nói rằng ngành nghề này là một trong những ngành nghề có tỉ lệ nam nữ cân đối nhất.
 - Manager là lĩnh vực công việc mà tỉ lệ nam vượt trội nhất so với nữ.
 """, icon="ℹ️")
+
+st.info("""**Giải pháp cho sự mất câng bằng giới tính trong ngành nghề DS/ML**:
+- Đãi ngộ công việc tốt cho nữ giới, đặc biệt là những người có gia đình, ví dụ như cho phép làm việc từ xa, có chế độ nghỉ thai sản, nghỉ việc khi có con nhỏ... điều này sẽ giúp cho nữ giới có thể làm việc lâu dài hơn trong ngành nghề này.
+- Tạo điều kiện cho nữ giới có thể thăng tiến trong công việc, ví dụ như tạo điều kiện cho nữ giới có thể tham gia vào các dự án lớn, có thể tham gia vào các quyết định lớn trong công ty, có thể thăng tiến lên các vị trí quản lý... điều này sẽ giúp cho nữ giới có thể có thêm động lực để tiếp tục làm việc trong ngành nghề này.
+- Tạo điều kiện cho nữ giới có thể tham gia vào các dự án nghiên cứu, phát triển, đào tạo... 
+- Chế độ thăm khám sức khỏe định kỳ cho nhân viên, đặc biệt là những nhân viên nữ giới.
+""", )
