@@ -12,7 +12,13 @@ st.set_page_config(
 
 df = st.session_state.df
 df_non_tech = st.session_state.df_non_tech
+df_title_job = st.session_state.df_title_job
 
+if "df" or "df_non_tech" or "df_title_job" not in st.session_state:
+    df = pd.read_csv('app_build/analysis_df_employee.csv')
+    df_non_tech = pd.read_csv('app_build/analysis_df.csv')
+    df_title_job = pd.read_csv('app_build/analysis_title_salary.csv')
+    
 # Tạo tiêu đề -----------------------------------------
 col1, col2, col3 = st.columns([1,6,1])
 
@@ -27,7 +33,7 @@ with col3:
 
 # Giá trị - Các biến quan sát -------------------------
 st.markdown("#### 1. Thông tin về dữ liệu:")
-
+st.markdown("##### 1.1 Dữ liệu khảo sát:")
 # Chưa lọc tech workers:
 st.markdown("<h5 style='text-align: center; color:green'>Đối với dữ liệu chưa được lọc tech workers:</h5>", unsafe_allow_html=True)
 
@@ -74,6 +80,26 @@ data_inf8.metric(
     value=df.shape[1] - df.select_dtypes(include=np.number).shape[1],
 )
 
+st.markdown("##### 1.2 Dữ liệu lương theo vai trò:")
+data_inf9, data_inf10, data_inf11, data_inf12 = st.columns(4)
+
+data_inf9.metric(
+    label="Số lượng quan sát",
+    value=df_title_job.shape[0],
+)
+data_inf10.metric(
+    label="Số lượng thuộc tính",
+    value=df_title_job.shape[1],
+)
+data_inf11.metric(
+    label="SỐ lượng thuộc tính số",
+    value=df_title_job.select_dtypes(include=np.number).shape[1],
+)
+data_inf12.metric(
+    label="Số lượng thuộc tính phân loại",
+    value=df_title_job.shape[1] - df_title_job.select_dtypes(include=np.number).shape[1],
+)
+
 
 st.markdown("---", unsafe_allow_html=True)
 
@@ -97,7 +123,7 @@ df_describe_pre = df_pre_year.describe().round(2).T
 
 # Dashboard về lương của thế giới ---------------------
 st.markdown("#### 2. Thông số thống kê về Salary ($):")
-st.markdown("<h4 style='text-align: center; color:green'>Tổng hợp từ 4 quốc gia</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color:green'>Tổng hợp từ 6 quốc gia</h4>", unsafe_allow_html=True)
 
 # Tạo các cột để hiển thị thông số thống kê (P1):
 stats_age_col1, stats_age_col2, stats_age_col3, stats_age_col4 = st.columns(4)
@@ -239,13 +265,15 @@ with fig_col4:
 # Tiến hành nhận xét -----------------
 st.markdown("#### 4. Các nhận xét hữu ích từ biểu đồ/thông số thống kê:")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Box Plot", "Tech Workers", "Age Range", "Salary Histogram", "Salary Boxplot"])
+st.markdown("##### 4.1 Bộ dữ liệu chính:")
+tab1, tab2, tab3, tab4 = st.tabs(["Box Plot", "Tech Workers", "Age Range", "Salary Histogram"])
 with tab1:
     st.markdown("##### 1. Box Plot:")
 
     col_tab1_1, col_tab1_2 = st.columns([4, 6])
     year_filter_tab = col_tab1_1.selectbox("Chọn năm thể hiện box plot", df['Year'].unique())
     df_year_tab = df[df["Year"] == year_filter_tab]
+
     df_describe_tab = df_year_tab.describe().round(2).T
     fig_boxplot_world_tab = px.box(df_year_tab, y="Salary")
 
@@ -253,7 +281,13 @@ with tab1:
         st.caption(f"1.1. Phân bổ lương DS/ML năm {year_filter_tab}")
         st.plotly_chart(fig_boxplot_world_tab,use_container_width=True,height=800)
     with col_tab1_2:
-        st.info("**Nhận xét chung**")
+        year_filter_tab5 = col_tab1_2.selectbox("Chọn năm khảo sát phân bổ lương theo tuổi", df['Year'].unique())
+        st.caption(f"5.1. Phân bổ lương theo độ tuổi của tech workers trong năm {year_filter_tab5} ")
+
+        df_year_tab5 = df[df["Year"] == year_filter_tab5]
+        df_salary_tab5 = px.box(df_year_tab5, x="Age", y='Salary', hover_data=df.columns)
+
+        st.plotly_chart(df_salary_tab5,use_container_width=True,height=800)
 
 with tab2:
     st.markdown("##### 2. Tech Workers:")
@@ -281,7 +315,7 @@ with tab3:
 
         st.plotly_chart(df_age_tab3,use_container_width=True,height=800)
     with col_tab3_2:
-        st.info(f"**Nhận xét chung**:")
+        st.info(f"**Nhận xét chung**: Độ tuổi của tech workers tham gia khảo sát tập trung chủ yếu trong khoảng từ 25 đến 34 tuổi. Từ đó giảm dần về các độ tuổi còn lại. Điều này có thể giải thích bởi độ tuổi này là độ tuổi mà người ta đã tốt nghiệp đại học và bắt đầu đi làm. Đồng thời, độ tuổi này cũng là độ tuổi mà người ta có thể có gia đình và có con. Vì vậy, họ sẽ có nhu cầu tìm kiếm một công việc ổn định và lương cao dựa trên kinh nghiệm của mình hơn để có thể nuôi sống cho gia đình của mình")
 
 with tab4:
     st.markdown("##### 4. Salary Histogram:")
@@ -296,19 +330,28 @@ with tab4:
 
         st.plotly_chart(df_salary_tab4,use_container_width=True,height=800)
     with col_tab4_2:
-        st.info(f"**Nhận xét chung**:")
+        st.info(f"**Nhận xét chung**: Qua từng năm, ta có thể thấy rằng lương của tech workers tăng dần theo độ tuổi, cụ thể là từ hơn 30 đến 50 tuổi rồi bắt đầu hạ xuống dần, điều này có thể được phỏng đoán dựa vào độ tuổi càng cao thì số kinh nghiệm họ tích góp được càng nhiều và lên chức vụ nếu đã làm lâu năm, nhưng sau độ tuổi 50 thì họ bắt đầu về hưu cho nên lương giảm mạnh. Ở độ tuổi 22 - 29, lương vẫn còn chưa cao vì có thể họ mới tìm được việc làm hay trong kỳ thực tập... ")
+
+st.markdown("##### 4.2 Bộ dữ liệu phụ:")
+
+tab5, tab6 = st.tabs(["Thông số Salary (USD)", "Tỷ lệ làm remote (%)"])
 
 with tab5:
-    st.markdown("##### 5. Salary Boxplot:")
-    col_tab5_1, col_tab5_2 = st.columns([4, 6])
+    col_tab5_1, col_tab5_2 = st.columns(2)
 
     with col_tab5_1:
-        year_filter_tab5 = col_tab5_1.selectbox("Chọn năm khảo sát phân bổ lương theo tuổi", df['Year'].unique())
-        st.caption(f"5.1. Phân bổ lương theo độ tuổi của tech workers trong năm {year_filter_tab5} ")
-
-        df_year_tab5 = df[df["Year"] == year_filter_tab5]
-        df_salary_tab5 = px.box(df_year_tab5, x="Age", y='Salary', hover_data=df.columns)
-
-        st.plotly_chart(df_salary_tab5,use_container_width=True,height=800)
+        df_salary_title_tab = df_title_job["salary_in_usd"].describe().T
+        st.dataframe(df_salary_title_tab)
     with col_tab5_2:
-        st.info(f"**Nhận xét chung**:")
+        fig_salary_title_tab = px.box(df_title_job, y="salary_in_usd")
+        st.plotly_chart(fig_salary_title_tab,use_container_width=True, width=900)
+with tab6:
+    col_tab6_1, col_tab6_2 = st.columns(2)
+
+    with col_tab6_1:
+        df_remote_title_tab = df_title_job["remote_ratio"].describe().T
+        st.dataframe(df_remote_title_tab)
+
+    with col_tab6_2:
+        fig_remote_title_tab = px.box(df_title_job, y="remote_ratio")
+        st.plotly_chart(fig_remote_title_tab,use_container_width=True, width=900)

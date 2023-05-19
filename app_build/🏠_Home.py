@@ -41,9 +41,13 @@ with col3:
 st.info("Bộ dữ liệu được lấy từ Kaggle, ở cuộc thi phân tích: (2019 - 2022) Kaggle Machine Learning & Data Science Survey (https://www.kaggle.com/competitions/kaggle-survey-2022/overview). \
         Bộ dữ liệu được Kaggle khảo sát từ người dùng để đưa ra những góc nhìn toàn diện về tình trạng của các ngành Khoa học dữ liệu và học máy. Cuộc khảo sát được thực hiện từ năm 2019 đến năm 2022. Những người khảo sát đến từ các quốc gia khác nhau, trong đó có Việt Nam.", icon="🔥")
 
-# df = pd.read_csv('analysis_df_employee.csv')
-df = pd.read_csv('app_build/analysis_df_employee.csv')
+df = pd.read_csv('analysis_df_employee.csv')
+# df = pd.read_csv('app_build/analysis_df_employee.csv')
 st.dataframe(df)
+
+st.info("Ngoài bộ dữ liệu được khảo sát, nhóm còn tìm thêm một bộ dữ liệu con về các vai trò công việc trong lĩnh vực DS/ML với mức lương cơ bản của nó trong khoảng từ năm 2020 - 2021 để bổ sung phân tích cho toàn bộ bài làm của nhóm. Được lấy trên trang: https://www.kaggle.com/datasets/ruchi798/data-science-job-salaries", icon="🔥")
+df_title_job = pd.read_csv('analysis_title_salary.csv')
+st.dataframe(df_title_job)
 
 #-------------------------------------------------------
 st.subheader("2. Thông tin về ứng dụng:")
@@ -57,8 +61,8 @@ st.write("""**🧑‍💻️ Tên ứng dụng**: Web app phân tích tình hìn
 - Cung cấp các phân tích dữ liệu đơn giản.
 - Phân tích hồi quy, giải thích và dự đoán mô hình. """)
 
-
-# df_non_tech = pd.read_csv("analysis_df.csv")
-df_non_tech = pd.read_csv("app_build/analysis_df.csv")
+df_non_tech = pd.read_csv("analysis_df.csv")
+# df_non_tech = pd.read_csv("app_build/analysis_df.csv")
 st.session_state.df = df
 st.session_state.df_non_tech = df_non_tech
+st.session_state.df_title_job = df_title_job

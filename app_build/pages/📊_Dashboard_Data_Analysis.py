@@ -16,6 +16,11 @@ st.set_page_config(
 df = st.session_state.df
 df_non_tech = st.session_state.df_non_tech
 
+if "df" or "df_non_tech" not in st.session_state:
+    df = pd.read_csv('app_build/analysis_df_employee.csv')
+    df_non_tech = pd.read_csv('app_build/analysis_df.csv')
+
+
 # Tạo tiêu đề -----------------------------------------
 col1, col2, col3 = st.columns([1,6,1])
 
