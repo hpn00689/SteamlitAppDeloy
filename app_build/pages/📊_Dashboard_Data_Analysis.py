@@ -281,9 +281,14 @@ st.info("""**Nhận xét:** Với biểu đồ cột thứ nhất, ta có thể 
 
 # -----
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("#### 5. ?")
+st.markdown("#### 5. Tỷ lệ nam/nữ qua các ngành đặc thù trong lĩnh vực DS/ML được thể hiện như thế nào?")
 
-rate_df = df.groupby(['Title', 'Gender']).size() / df.groupby('Title').size() * 100
+unwanted = {'Currently not employed', 'Not employed', 'Student'}
+title_list = df['Title'].value_counts().nlargest(n=14).index.to_list()
+title_list = [e for e in title_list if e not in unwanted]
+
+rate_df = df[df['Title'].isin(title_list)]
+rate_df = rate_df.groupby(['Title', 'Gender']).size() / df.groupby('Title').size() * 100
 rate_df = rate_df.reset_index(name='Rate')
 rate_df = rate_df.sort_values(by='Rate')
 
@@ -292,7 +297,7 @@ rate_df['Gender'] = rate_df['Gender'].replace(['Nonbinary', 'Prefer to self-desc
 fig5 = go.Figure()
 
 for gender in rate_df['Gender'].unique():
-    fig5.add_trace(
+    fig.add_trace(
         go.Bar(
             x=rate_df[rate_df['Gender'] == gender]['Title'],
             y=rate_df[rate_df['Gender'] == gender]['Rate'],
@@ -302,11 +307,11 @@ for gender in rate_df['Gender'].unique():
 
 fig5.update_layout(
     title={
-        'text': 'Gender Rate by Title',
+        'text': 'Gender Rate by Occupation',
         'x':0.5,
-        'y': 0.95
+        'y': 0.96
     },
-    xaxis_title='Title',
+    xaxis_title='Occupation',
     yaxis_title='Rate (%)',
     template='plotly_white',
     barmode='group',
@@ -319,7 +324,7 @@ fig5.update_layout(
     ),
     bargap=0.2,
     autosize=False,
-    width=1800,
+    width=1250,
     height=600,
     margin=dict(l=50, r=50, t=50, b=50),
     xaxis=dict(type='category'),
@@ -328,3 +333,6 @@ fig5.update_layout(
 
 
 st.plotly_chart(fig5, use_container_width= True, height = 800)
+
+st.info("""
+""", icon="ℹ️")
