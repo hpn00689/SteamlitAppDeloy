@@ -151,3 +151,16 @@ col2.metric(
     value=round(linear_mae, 3),
 )
 
+# Thử tạo mẫu dữ liệu -----------------------------------
+st.markdown("<h3 style='text-align: center;'>TẠO MẪU DỮ LIỆU</h3>", unsafe_allow_html=True)
+
+# ----
+col1, col2, col3 = st.columns(3) 
+
+age_choice = col1.slider("Tuổi", min_value=18, max_value=60, value=30, step=1) 
+
+
+
+
+
+
