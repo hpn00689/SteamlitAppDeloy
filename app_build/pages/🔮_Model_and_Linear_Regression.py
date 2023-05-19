@@ -167,6 +167,9 @@ title_choice = col3.selectbox("Vị trí/vai trò", (new_df["Title"].unique()))
 
 education_choice = col1.selectbox("Bằng cấp", (new_df["Formal Education"].unique()))
 
+country_choice = col2.selectbox("Quốc gia", (new_df["Country"].unique()))
+
+
 
 
 
