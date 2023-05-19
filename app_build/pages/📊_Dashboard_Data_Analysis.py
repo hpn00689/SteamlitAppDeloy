@@ -297,7 +297,7 @@ rate_df['Gender'] = rate_df['Gender'].replace(['Nonbinary', 'Prefer to self-desc
 fig5 = go.Figure()
 
 for gender in rate_df['Gender'].unique():
-    fig.add_trace(
+    fig5.add_trace(
         go.Bar(
             x=rate_df[rate_df['Gender'] == gender]['Title'],
             y=rate_df[rate_df['Gender'] == gender]['Rate'],
@@ -334,5 +334,8 @@ fig5.update_layout(
 
 st.plotly_chart(fig5, use_container_width= True, height = 800)
 
-st.info("""
+st.info("""**Nhận xét: 
+- Trong cả top 10 ngành nghề hot nhất, tỉ lệ nhân viên nam đều vượt trội hơn nhiều so với tỉ lệ nhân viên nữ (trung bình gấp ít nhất 5 lần).
+- Tuy nhiên, đối với công việc giáo viên/giáo sư (Teacher/Professor), tỉ lệ nam nữ khá cân đối khi tỉ lệ giáo viên nữ chỉ thua giáo viên nam khoảng hơn 10%. Vì đặc thù công việc này là truyền đạt kiến thức, nên có thể nói rằng ngành nghề này là một trong những ngành nghề có tỉ lệ nam nữ cân đối nhất.
+- Manager là lĩnh vực công việc mà tỉ lệ nam vượt trội nhất so với nữ.
 """, icon="ℹ️")
