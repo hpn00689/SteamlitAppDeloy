@@ -222,23 +222,23 @@ not_employee_paper = df_non_tech['Published Papers'].value_counts().to_frame() -
 employee_paper.reset_index(inplace=True)
 not_employee_paper.reset_index(inplace=True)
 
-fig = make_subplots(rows=1,cols=2,
+fig3 = make_subplots(rows=1,cols=2,
                     specs=[[{"type": "pie"}, {"type": "pie"}]],
                     subplot_titles=("Employee","Unemployment"))
-fig.add_trace(go.Pie(
+fig3.add_trace(go.Pie(
      name='',
      values=employee_paper['count'],
      labels=employee_paper['Published Papers']),
      row=1, col=1)
 
-fig.add_trace(go.Pie(
+fig3.add_trace(go.Pie(
      name='',
      values=not_employee_paper['count'],
      labels=not_employee_paper['Published Papers']),
     row=1, col=2)
 
-fig.update_layout(height=600, width=1000, title_text="Published Papers")
-st.plotly_chart(fig, use_container_width= True, height = 800)
+fig3.update_layout(height=600, width=1000, title_text="Published Papers")
+st.plotly_chart(fig3, use_container_width= True, height = 800)
 
 st.info("""**Nhận xét:** Ta có thể thấy rằng người đi làm có xu hướng có nhiều bài báo hơn so với những người chưa đi làm. Điều này có thể là do họ có nhiều kinh nghiệm hơn, hoặc có thể là do họ có nhiều thời gian hơn để nghiên cứu. 
 Ngoài ra, ta có thể thấy được việc có bào báo publish hay không cũng có một phần ảnh hưởng đến khả năng có việc của những người khảo sát khi đa phần những người chưa có việc cũng chưa có bài báo publish, tuy nhiên việc này thì không mang tính bắt buộc vì khi ta xem những khảo sát thì số người có việc thì số lượng người không có bài báo publish cũng chiếm hơn 50%, tuy rằng không chiếm phần lớn như những người chưa có việc.""", icon="ℹ️")
@@ -392,3 +392,158 @@ st.info("""**Nhận xét**:
 - Data Scientist có số lượng cao nhất trong tất cả các ngành nghề, trong khi số lượng Data Journalist thì thấp nhất. Tuy nhiên, Data Scientist có mức lương có thể gọi là thấp (tầm 110000$), có lẽ vì quá nhiều nhân lực nên mức lương của ngành nghề này bị giảm xuống.
 - Product/Project Manager có mức lương trung bình cao nhất, trong khi Data Architect có mức lương trung bình thấp nhất. Điều này có thể là do Data Architect là một ngành nghề mới, nên mức lương trung bình của nó còn thấp.
 """, icon="ℹ️")
+
+# -----
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("#### 7. Tỷ lệ phân hóa độ tuổi theo từng quốc gia qua các năm trong ngành DS/ML:")
+
+_WIDTH = 900
+
+# Lấy các country, get 'China', 'India', 'Viet Nam', 'United States'
+df_fil_country = df[df['Country'].isin(["China🇨🇳", "India🇮🇳", "Viet Nam", "U.S.🇺🇸"])]
+
+
+fig7 = px.histogram(df_fil_country,
+                    x="Country", color="Age", barmode="stack", histfunc="count",
+                    barnorm="percent", animation_frame="Year",
+                    width=_WIDTH, height=600,
+                    category_orders={"Country": ["China🇨🇳", "India🇮🇳", "Viet Nam", "U.S.🇺🇸"],
+                                      "Gender":["Man", "Woman", "Prefer not to say", "Nonbinary"],
+                                      "Year": range(2018,2022)},
+                    title="Gender distribution of people")
+fig7.update_xaxes(type='category')
+fig7.update_yaxes(title="Percentage of respondents (%)")
+st.plotly_chart(fig7, use_container_width=True)
+
+st.info("""**Nhận xét**:
+- Như ta có thể thấy từ biểu đồ, tỉ lệ phân hoá độ tuổi theo từng quốc gia ở Mỹ cao hơn rõ rệt so với 3 nước còn lại, số lượng người tham gia cuộc phỏng vấn là công dân Mỹ thường có thể nằm trong bất kì độ tuổi nào. Trong khi đó Việt Nam, Ấn Độ và Trung Quốc chiếm số đông là những người có độ tuổi từ 18 đến dưới 40, phần còn lại chiếm thiểu số.
+- Nếu ta nhìn sâu hơn qua các năm từ 2018 đến 2022, có 1 điểm chung giữa 3 quốc gia Việt Nam, Trung Quốc và Ấn Độ là cả số lượng người thuộc độ tuổi 18-21 có cùng xu hướng tăng dần theo từng năm, đỉnh điểm là năm 2021 số lượng người tham gia cuộc phỏng vấn ở Việt Nam độ tuổi này chiếm 40%, sau đó là Ấn Độ với hơn 35% và Trung Quốc với 25%, đều cao hơn cả 3 năm trước đó. Điều này có thể lý giải được việc ngày càng có nhiều người trẻ có sự hứng thú và tham gia vào việc học cũng như làm trong mảng Machine Learning và Data Science.
+- Ngoài ra, ta cũng thấy được rằng số lượng người trả lời thuộc độ tuổi 25-29 cũng chiếm phần lớn, nguyên nhân là vì đây là độ tuổi phù hợp nhất về trình độ lẫn chuyên môn trong 2 lĩnh vực Machine Learning và Data Science, tuy nhiên có 1 điểm thú vị là số lượng người ở độ tuổi này ở Mỹ thì giảm dần theo từng năm, bắt đầu với 25% số người thuộc độ tuổi này vào năm 2018 nhưng chỉ còn khoảng 14% vào năm 2022.
+""", icon="ℹ️")
+
+# -----
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("#### 8. Số năm kinh nghiệm giữa những người trong ngành DS/ML từng quốc gia qua các năm thể hiện như thế nào?")
+
+fig8 = px.histogram(df_fil_country,
+                    x="Country", color="Coding Experience", barmode="stack", histfunc="count",
+                    barnorm="percent", animation_frame="Year",
+                    width=_WIDTH, height=600,
+                    category_orders={"Country": ["China🇨🇳", "India🇮🇳", "Viet Nam", "U.S.🇺🇸"],
+                                      "Gender":["Man", "Woman", "Prefer not to say", "Nonbinary"],
+                                      "Year": range(2018,2022)},
+                    title="Gender distribution of people",
+                )
+fig8.update_xaxes(type='category')
+fig8.update_yaxes(title="Percentage of respondents (%)")
+st.plotly_chart(fig8, use_container_width=True)
+
+st.info("""**Nhận xét**:
+- Điểm chung giữa các biểu đồ xuyên suốt các năm từ 2018 đến 2022 là số lượng người tham gia trả lời có dưới 1 năm kinh nghiệm ở Trung Quốc, Ấn Độ và Việt Nam đều cao hơn so với cả Mỹ (trong đó cao nhất là Việt Nam vào năm 2018 với 43%)
+- Số lượng người có từ 1 đến 5 năm kinh nghiệm trong lĩnh vực Data Science và Machine Learning chiếm số lượng đông đảo nhất trong cuộc phỏng vấn, tỉ lệ luôn trong khoảng 50% cho cả 4 quốc gia. Điều đó chứng tỏ rằng đây mới là nhóm người có đủ kiến thức chuyên môn và sẽ mang trọng số lớn nhất để cho ra kết quả khảo sát chính xác nhất.
+- Ngoài ra, các nhóm người còn lại như những người có từ 5 đến 10 năm, 10 đến 20 năm hoặc thậm chí hơn 20 năm chiếm tỉ lệ cao nhất ở Mỹ, cao hơn hẳn so với 3 quốc gia còn lại (cụ thể nhóm người có từ 10-20 năm kinh nghiệm ở Mỹ đạt 14% năm 2020 và 16% cùng năm đó cho nhóm người có trên 20 năm kinh nghiệm), trong khi đó hầu như nhóm người đó gần như không xuất hiện ở cả 3 quốc gia kia.
+""", icon="ℹ️")
+
+#-----
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("#### 9. Mức thu nhập theo giới tính ở từng quốc gia qua các năm thể hiện như thế nào?")
+
+avg_data = df_fil_country[df_fil_country["Gender"].isin(["Man", "Woman"])]
+avg_data = avg_data[["Country", "Gender", "Salary", "Year"]]
+avg_data = avg_data.dropna(subset=["Gender", "Country", "Salary", "Year"])
+avg_data = avg_data.groupby(["Country", "Gender", "Year"], as_index=False).mean()
+
+
+fig9 = px.bar(avg_data,
+            x="Country", y="Salary",
+            color="Gender",
+            animation_frame="Year",
+            barmode="group",
+            width=_WIDTH, height=600,
+            category_orders={"Country": ["China🇨🇳", "India🇮🇳", "Viet Nam", "U.S.🇺🇸"],
+                            "Gender":["Man", "Woman"],
+                            "Year": range(2018,2022)},
+            title="Average yearly compensation of men and women",
+            text="Salary")
+
+fig9.update_traces(texttemplate='%{text:.2f}', textposition='outside')
+fig9.update_layout(yaxis_range=[0,38000])
+fig9.update_yaxes(title="Average yearly compensation (number of Big Macs)")
+fig9.update_xaxes(type='category')
+
+st.plotly_chart(fig9, use_container_width=True)
+
+st.info("""**Nhận xét**:
+- Về tổng quát, mức lương thường niên trung bình ở 4 quốc gia qua các năm có sự tăng giảm không hề ổn định. Tuy nhiên, đáng chú ý là trung bình thu nhập hằng năm ở Mỹ của nam luôn cao hơn nữ, lệch nhiều nhất là trong năm 2022 với hơn 35,5k đô cho nam và chỉ gần 24k cho nữ (lệch 11k đô).
+- Ở 3 quốc gia còn lại, có sự thay đổi rõ rệt giữa từng năm, có những năm tổng thu nhập hằng năm của nam cao hơn, có năm thì của nữ cao hơn. Điều này cho thấy được thu nhập ở 3 quốc gia này thực sự không phải dựa trên giới tính mà nó được trả công bằng thực lực và mức độ chuyên môn của người làm trong ngành Machine Learning và Data Science.
+""", icon="ℹ️")
+
+#-----
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("#### 10. Sự phân bổ giữa các trình độ học vấn của người tham gia khảo sát được thể hiện như thế nào?")
+
+import plotly.figure_factory as ff
+
+z = df.groupby(['Formal Education', 'Age']).size().unstack().fillna(0).astype('int64')
+z_data = z.apply(lambda x:np.round(x/x.sum(), 2), axis = 1).to_numpy() # convert to correlation matrix
+x = z.columns.tolist()
+y = z.index.tolist()
+
+fig10 = ff.create_annotated_heatmap(z_data, x = x, y = y, colorscale = "Viridis", showscale = True)
+
+st.plotly_chart(fig10, use_container_width=True)
+
+st.info("""**Nhận xét**:  
+- Người trong khoảng độ tuổi 18 - 21 vẫn đang học và chưa có bẳng cử nhân chiếm tỉ lệ cao nhất, song song theo đó thì những người chưa qua bậc trung học vẫn chiếm một tỷ lệ vừa trong độ tuổi này.
+- Từ độ tuổi 22 - 39, tỉ lệ người có bằng tiến sĩ và thạc sĩ, bằng cấp chuyên nghiệp lại chiếm cao hơn tất cả các bậc học khác, đặc biệt là ở độ tuổi 30 - 34.
+- Ngoài ra, càng cao tuổi thì không có bậc học cụ thể, có thể họ ít tham gia vào bài khảo sát nên không đủ dữ liệu để phân tích.
+""", icon="ℹ️")
+
+#-----
+st.markdown("---", unsafe_allow_html=True)
+
+st.markdown("<h5 style='text-align: center; color:green'>DASHBOARD</h5>", unsafe_allow_html=True)
+
+st.markdown("---", unsafe_allow_html=True)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("#### Learning Platform Recommendation")
+    st.plotly_chart(fig1, use_container_width=True, width=800)
+with col2:
+    st.markdown("#### Programming Languages Recommendation")
+    st.plotly_chart(plot2, use_container_width=True, witdh=800)
+
+col3, col4, col5 = st.columns(3)
+
+with col3:
+    st.markdown("#### Age & Gender & Year")
+    st.plotly_chart(fig7, use_container_width=True, width=800)
+with col4:
+    st.markdown("#### Coding Experience & Country & Year")
+    st.plotly_chart(fig8, use_container_width=True, width=800)
+with col5:
+    st.markdown('#### Gender & Country & Year & Salary')
+    st.plotly_chart(fig9, use_container_width=True, width=800)
+
+col6, col7 = st.columns(2)
+
+with col6:
+    st.markdown("#### Coding Experience & Salary")
+    st.plotly_chart(fig4, use_container_width=True, width=800)
+with col7: 
+    st.markdown("#### Gender & Jobs Title")
+    st.plotly_chart(fig5, use_container_width=True, width=800)
+
+st.markdown("#### Salary & Jobs Title")
+st.plotly_chart(fig_scatter6, use_container_width=True, width=800)
+
+col8, col9 = st.columns(2)
+
+with col8:
+    st.markdown("#### Paper & Worker")
+    st.plotly_chart(fig3, use_container_width=True, width=800)
+with col9:
+    st.markdown("#### Education & Age")
+    st.plotly_chart(fig10, use_container_width=True, width=800)
