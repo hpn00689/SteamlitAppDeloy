@@ -219,7 +219,10 @@ st.markdown("#### 3. Việc đi làm sẽ có nhiều kinh nghiệm cho việc n
 employee_paper = df_employee['Published Papers'].value_counts().to_frame()
 not_employee_paper = df_non_tech['Published Papers'].value_counts().to_frame() - employee_paper
 
-st.write(employee_paper["Published Papers"])
+employee_paper.reset_index(inplace=True)
+not_employee_paper.reset_index(inplace=True)
+
+st.write(employee_paper)
 
 fig = make_subplots(rows=1,cols=2,
                     specs=[[{"type": "pie"}, {"type": "pie"}]],
@@ -227,13 +230,13 @@ fig = make_subplots(rows=1,cols=2,
 fig.add_trace(go.Pie(
      name='',
      values=employee_paper['Published Papers'],
-     labels=employee_paper.index.tolist(),hole=0.3),  
+     labels=employee_paper['index']),
      row=1, col=1)
 
 fig.add_trace(go.Pie(
      name='',
      values=not_employee_paper['Published Papers'],
-     labels=not_employee_paper.index.tolist(),hole=0.3),
+     labels=not_employee_paper['index']),
     row=1, col=2)
 
 fig.update_layout(height=600, width=1000, title_text="Published Papers")
