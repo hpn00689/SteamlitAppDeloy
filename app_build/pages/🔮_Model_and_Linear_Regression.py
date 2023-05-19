@@ -120,4 +120,34 @@ st.info(""" **Các cột dữ liệu được sử dụng làm feature:**
 - ML Experience: số năm kinh nghiệm về machine learning.
 - Country: quốc gia (gồm 4 quốc gia chính là India, China, USA, VietNam).
 - Year: năm người tham gia trả lời câu hỏi.
+
+**Cột dữ liệu được sử dụng làm target:**
+- Salary: mức lương.
+
+**Mô hình:** Linear Regression.
+
+**Độ đo:** RMSE và MAE.
 """, icon="ℹ️")
+
+# Chọn mô hình ------------------------------------------
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+
+linear_predict = linear_model.predict(X_test)
+linear_rmse = np.sqrt(mean_squared_error(y_test, linear_predict))
+linear_mae = mean_absolute_error(y_test, linear_predict)
+print("Linear Regression RMSE:", linear_rmse)
+print("Linear Regression MAE", linear_mae)
+
+# ----
+col1, col2 = st.columns(2)
+
+col1.metric(
+    label="RMSE",
+    value=round(linear_rmse, 3),
+)
+col2./metric(
+    label="MAE",
+    value=round(linear_mae, 3),
+)
+
