@@ -146,7 +146,7 @@ col1.metric(
     label="RMSE",
     value=round(linear_rmse, 3),
 )
-col2./metric(
+col2.metric(
     label="MAE",
     value=round(linear_mae, 3),
 )
