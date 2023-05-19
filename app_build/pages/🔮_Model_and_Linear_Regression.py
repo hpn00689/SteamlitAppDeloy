@@ -7,6 +7,9 @@ from scipy.stats import zscore
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score
 
 # Config trang -----------------------------------------
 st.set_page_config(
@@ -169,10 +172,15 @@ education_choice = col1.selectbox("Bằng cấp", (new_df["Formal Education"].un
 
 country_choice = col2.selectbox("Quốc gia", (new_df["Country"].unique()))
 
+#----
+# Lấy dữ liệu từ người dùng đã nhập:
 
 
 
 
+#----------------------------------------------------------
+new_df = df[new_df["Country"] != "Russia🇷🇺"]
+new_df = df[new_df["Country"] != "Australia🇦🇺"]
 
 
 
