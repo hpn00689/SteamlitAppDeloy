@@ -161,6 +161,8 @@ age_choice = col1.slider("Tuổi", min_value=18, max_value=60, value=30, step=1)
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
+title_choice = col3.selectbox("Vị trí/vai trò", (new_df["Title"].unique()))
+
 
 
 
