@@ -219,6 +219,8 @@ st.markdown("#### 3. Việc đi làm sẽ có nhiều kinh nghiệm cho việc n
 employee_paper = df_employee['Published Papers'].value_counts().to_frame()
 not_employee_paper = df_non_tech['Published Papers'].value_counts().to_frame() - employee_paper
 
+st.write(employee_paper["Published Papers"])
+
 fig = make_subplots(rows=1,cols=2,
                     specs=[[{"type": "pie"}, {"type": "pie"}]],
                     subplot_titles=("Employee","Unemployment"))
