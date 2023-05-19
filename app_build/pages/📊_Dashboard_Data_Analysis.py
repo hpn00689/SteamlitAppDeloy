@@ -230,13 +230,13 @@ fig = make_subplots(rows=1,cols=2,
 fig.add_trace(go.Pie(
      name='',
      values=employee_paper['Published Papers'],
-     labels=employee_paper['index']),
+     labels=employee_paper['count']),
      row=1, col=1)
 
 fig.add_trace(go.Pie(
      name='',
      values=not_employee_paper['Published Papers'],
-     labels=not_employee_paper['index']),
+     labels=not_employee_paper['count']),
     row=1, col=2)
 
 fig.update_layout(height=600, width=1000, title_text="Published Papers")
