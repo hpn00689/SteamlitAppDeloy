@@ -91,7 +91,6 @@ for ml in ml_list:
     ml_numeric.append(numbers)
 
 ml_map = {k: sum(v) / len(v) for k, v in zip(list(ml_list), ml_numeric)}
-
 new_df["ML Experience"] = new_df["ML Experience"].map(ml_map)
 
 # Xử lý cột Country:-------------------------------------
@@ -108,7 +107,6 @@ y = y.to_numpy()
 y = zscore(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 # ----
 st.markdown("<h3 style='text-align: center;'>BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
