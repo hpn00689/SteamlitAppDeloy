@@ -237,7 +237,11 @@ st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
 
 st.markdown("#### Mức lương người đó nhận được theo sự lựa chọn của bạn: ", unsafe_allow_html=True)
-st.markdown("#### **{}**".format(round(linear_model.predict([data_point])[0], 3)), unsafe_allow_html=True)
+st.metric(
+    label="Mức lương:",
+    value=round(linear_model.predict([data_point])[0], 3),
+)
+
 # ----
 # st.markdown("---", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP</h3>", unsafe_allow_html=True)
