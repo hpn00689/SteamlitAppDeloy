@@ -229,7 +229,7 @@ year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
 #---- Lấy dữ liệu từ tất cả lựa chọn:
 
-data_point = list([age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice])
+data_point = [age_choice.value, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice]
 st.write(data_point)
 
 
