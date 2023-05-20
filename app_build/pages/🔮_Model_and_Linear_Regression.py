@@ -186,8 +186,9 @@ lst_true_model_education = new_df["Formal Education"].unique()
 
 # Compare education_choice with lst_education, get index:
 index_education = np.where(lst_education == education_choice)[0][0]
+education_choice = lst_true_model_education[index_education]
 
-st.write("index_education:", index_education)
+st.write("index_education:", education_choice)
 
 country_choice = col2.selectbox("Quốc gia", (df_train["Country"].unique()))
 
