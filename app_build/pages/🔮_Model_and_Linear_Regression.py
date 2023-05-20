@@ -265,7 +265,7 @@ st.info(""" **Các cột dữ liệu sử dụng làm feature:**
 
 **Độ đo đánh giá mô hình:** Accuracy Score.
 
-**SỐ lượng neighbor:** Sau khi dùng GridSearchCV, số lượng neighbor tốt nhất là 24.
+**Số lượng neighbor:** Sau khi dùng GridSearchCV, số lượng neighbor tốt nhất là 24.
 """, icon="ℹ️")
 
 

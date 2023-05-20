@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 import plotly.express as px
 
 # Config trang -----------------------------------------
@@ -122,3 +124,38 @@ st.info("""**Nhận xét**:
 - Kết quả đưa ra không quá ngạc nhiên khi môi trường remote hoàn toàn có mức lương khác hẳn các hình thức làm việc truyền thống. 
 - Tuy thế thì cũng phản ánh được một sự cần cân nhắc cho người lao động khi lựa chọn hình thức remote hoàn toàn khi đây có thể coi là 'xu hướng' làm việc của nhiều người lao động hiện tại trong ngành công nghệ.
 """, icon="📝")
+
+df_salary = pd.read_csv('app_build/analysis_title_salary.csv')
+Company_size_L = df_salary[df_salary.company_size == 'L']
+Company_size_M = df_salary[df_salary.company_size == 'M']
+Company_size_S = df_salary[df_salary.company_size == 'S']
+
+fig = make_subplots(rows=1,cols=3,
+                    subplot_titles=("Large","Medium","Small"))
+
+fig.add_trace(go.Histogram(x=Company_size_L.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=1)
+
+fig.add_trace(go.Histogram(x=Company_size_M.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=2)
+
+fig.add_trace(go.Histogram(x=Company_size_S.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=3)
+
+fig.update_layout(showlegend = False, title_text="Salary at different company sizes")
+st.plotly_chart(fig, use_container_width=True)
