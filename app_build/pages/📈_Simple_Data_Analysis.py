@@ -192,3 +192,4 @@ fig2.add_trace(go.Histogram(x=remote_100.salary_in_usd,name='',marker = dict(
      row=1, col=3)
 
 fig2.update_layout(showlegend = False, title_text="Salary at different job types")
+st.plotly_chart(fig2, use_container_width=True)
