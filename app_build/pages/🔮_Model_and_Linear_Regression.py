@@ -165,9 +165,14 @@ lst_true_model_age = new_df["Age"].unique()
 # Compare age_choice with lst_age, get index:
 index = np.where(lst_age == age_choice)[0][0]
 age_choice = lst_true_model_age[index]
-st.write(age_choice)
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
+if gender_choice == 'Man':
+    gender_choice = 1
+else:
+    gender_choice = 2
+
+st.write(gender_choice)
 
 title_choice = col3.selectbox("Vị trí/vai trò", (df_train["Title"].unique()))
 
