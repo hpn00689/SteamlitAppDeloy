@@ -172,9 +172,15 @@ if gender_choice == 'Man':
 else:
     gender_choice = 2
 
-st.write(gender_choice)
-
 title_choice = col3.selectbox("Vị trí/vai trò", (df_train["Title"].unique()))
+lst_title = df_train["Title"].unique()
+lst_true_model_title = new_df["Title"].unique()
+
+# Compare title_choice with lst_title, get index:
+index_title = np.where(lst_title == title_choice)[0][0]
+title_choice = lst_true_model_title[index_title]
+
+st.write("Vị trí/vai trò:", title_choice)
 
 education_choice = col1.selectbox("Bằng cấp", (df_train["Formal Education"].unique()))
 
