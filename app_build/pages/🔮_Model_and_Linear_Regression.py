@@ -158,6 +158,8 @@ st.markdown("---", unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3) 
 
 age_choice = col1.selectbox("Tuổi", (df_train["Age"].unique()))
+age_choice = age_choice.replace("+", "").apply(lambda x: sum(map(lambda i: int(i), x.split("-"))) / len(x.split("-")))
+st.write(age_choice)
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
