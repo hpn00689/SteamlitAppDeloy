@@ -177,8 +177,6 @@ year_choice = col2.selectbox("Năm", (new_df["Year"].unique()))
 # Lấy dữ liệu từ người dùng đã nhập:
 
 
-
-
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
