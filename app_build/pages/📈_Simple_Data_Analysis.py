@@ -160,9 +160,9 @@ st.info("""**Nhận xét**:
 - Tuy thế thì cũng phản ánh được một sự cần cân nhắc cho người lao động khi lựa chọn hình thức remote hoàn toàn khi đây có thể coi là 'xu hướng' làm việc của nhiều người lao động hiện tại trong ngành công nghệ.
 """, icon="📝")
 
-remote_0 = df[df.remote_ratio == 0]
-remote_50 = df[df.remote_ratio == 50]
-remote_100 = df[df.remote_ratio == 100]
+remote_0 = df_salary[df_salary.remote_ratio == 0]
+remote_50 = df_salary[df_salary.remote_ratio == 50]
+remote_100 = df_salary[df_salary.remote_ratio == 100]
 
 fig2 = make_subplots(rows=1,cols=3,
                     subplot_titles=("Offline","Partial remote","Fully remote"))
