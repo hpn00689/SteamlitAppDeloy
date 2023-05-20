@@ -183,7 +183,7 @@ title_choice = lst_true_model_title[index_title]
 education_choice = col1.selectbox("Bằng cấp", (df_train["Formal Education"].unique()))
 
 lst_education = df_train["Formal Education"].unique()
-lst_education.remove(nan)
+lst_education = np.delete(lst_education, np.where(lst_education == "nan")
 
 lst_true_model_education = new_df["Formal Education"].unique()
 
