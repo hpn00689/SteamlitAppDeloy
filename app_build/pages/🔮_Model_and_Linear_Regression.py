@@ -214,7 +214,17 @@ coding_exp_choice = lst_true_model_coding_exp[index_coding_exp]
 st.write(coding_exp_choice)
 
 # ---- ML Experience
-ml_exp_choice = col1.selectbox("Số năm kinh nghiệm ML", (df_train["ML Experience"].unique()))
+lst_ml_exp = df_train["ML Experience"].unique()
+lst_ml_exp = np.delete(lst_ml_exp, 5)
+
+ml_exp_choice = col1.selectbox("Số năm kinh nghiệm ML", lst_ml_exp)
+
+lst_true_model_ml_exp = new_df["ML Experience"].unique()
+index_ml_exp = np.where(lst_ml_exp == ml_exp_choice)[0][0]
+
+ml_exp_choice = lst_true_model_ml_exp[index_ml_exp]
+
+# ---- Year
 
 year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
