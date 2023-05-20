@@ -257,7 +257,6 @@ st.info(""" **Các cột dữ liệu sử dụng làm feature:**
 - Coding Experience: Số năm kinh nghiệm lập trình
 - ML Experience: Số năm kinh nghiệm ML
 - Country: Quốc gia
-- Year: Năm.
 
 **Cột dữ liệu sử dụng làm target:**
 - Salary Range: Khoảng lương.
@@ -265,47 +264,14 @@ st.info(""" **Các cột dữ liệu sử dụng làm feature:**
 **Mô hình:** K-Nearest Neighbors (KNN) Classifier.
 
 **Độ đo đánh giá mô hình:** Accuracy Score.
+
+**SỐ lượng neighbor:** Sau khi dùng GridSearchCV, số lượng neighbor tốt nhất là 24.
 """, icon="ℹ️")
 
 
-# new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
-# new_df_KNN = df[df["Country"] != "Australia🇦🇺"]
+col1_KNN, col2_KNN = st.columns(2)
 
-# salary_ranges = pd.qcut(new_df_KNN['Salary'], q=3, labels=['Low', 'Medium', 'High'])
-# # Create Salary Range column
-# new_df_KNN['Salary Range'] = salary_ranges
 
-# # Select the relevant features and the target variable
-# features = ['Age', 'Title', 'Formal Education', 'Coding Experience', 'ML Experience', 'Country']
-# target = 'Salary Range'
-
-# # Preprocess the data by converting categorical variables into numerical representation
-# survey_data_encoded = pd.get_dummies(new_df_KNN[features])
-
-# # Split the data into training and testing sets
-# X_train, X_test, y_train, y_test = train_test_split(survey_data_encoded, new_df_KNN[target], test_size=0.2, random_state=42)
-
-# # Create the KNN classifier
-# knn_classifier = KNeighborsClassifier()
-
-# # Define the parameter grid for grid search
-# param_grid = {'n_neighbors': list(range(10, 30, 2))}
-
-# # Perform grid search with cross-validation
-# grid_search = GridSearchCV(knn_classifier, param_grid, cv=len(param_grid['n_neighbors']))
-# grid_search.fit(X_train, y_train)
-
-# # Get the best parameter value and the corresponding classifier
-# best_n_neighbors = grid_search.best_params_['n_neighbors']
-# best_classifier = grid_search.best_estimator_
-
-# # Make predictions on the test set using the best classifier
-# predictions = best_classifier.predict(X_test)
-
-# # Evaluate the model using accuracy score
-# accuracy = accuracy_score(y_test, predictions)
-# print("Best n_neighbors:", best_n_neighbors)
-# print("Accuracy:", accuracy)
 
 
 
