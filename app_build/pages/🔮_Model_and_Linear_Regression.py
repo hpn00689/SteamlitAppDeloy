@@ -157,21 +157,21 @@ st.markdown("---", unsafe_allow_html=True)
 # ----
 col1, col2, col3 = st.columns(3) 
 
-age_choice = col1.selectbox("Tuổi", (new_df["Age"].unique()))
+age_choice = col1.selectbox("Tuổi", (df_train["Age"].unique()))
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
-title_choice = col3.selectbox("Vị trí/vai trò", (new_df["Title"].unique()))
+title_choice = col3.selectbox("Vị trí/vai trò", (df_train["Title"].unique()))
 
-education_choice = col1.selectbox("Bằng cấp", (new_df["Formal Education"].unique()))
+education_choice = col1.selectbox("Bằng cấp", (df_train["Formal Education"].unique()))
 
-country_choice = col2.selectbox("Quốc gia", (new_df["Country"].unique()))
+country_choice = col2.selectbox("Quốc gia", (df_train["Country"].unique()))
 
-coding_exp_choice = col3.selectbox("Số năm kinh nghiệm lập trình", (new_df["Coding Experience"].unique()))
+coding_exp_choice = col3.selectbox("Số năm kinh nghiệm lập trình", (df_train["Coding Experience"].unique()))
 
-ml_exp_choice = col1.selectbox("Số năm kinh nghiệm ML", (new_df["ML Experience"].unique()))
+ml_exp_choice = col1.selectbox("Số năm kinh nghiệm ML", (df_train["ML Experience"].unique()))
 
-year_choice = col2.selectbox("Năm", (new_df["Year"].unique()))
+year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
 #----
 # Lấy dữ liệu từ người dùng đã nhập:
@@ -182,47 +182,47 @@ st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
 
 # ----
-st.markdown("---", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP</h3>", unsafe_allow_html=True)
+# st.markdown("---", unsafe_allow_html=True)
+# st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP</h3>", unsafe_allow_html=True)
 
-new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
-new_df_KNN = df[df["Country"] != "Australia🇦🇺"]
+# new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
+# new_df_KNN = df[df["Country"] != "Australia🇦🇺"]
 
-salary_ranges = pd.qcut(new_df_KNN['Salary'], q=3, labels=['Low', 'Medium', 'High'])
-# Create Salary Range column
-new_df_KNN['Salary Range'] = salary_ranges
+# salary_ranges = pd.qcut(new_df_KNN['Salary'], q=3, labels=['Low', 'Medium', 'High'])
+# # Create Salary Range column
+# new_df_KNN['Salary Range'] = salary_ranges
 
-# Select the relevant features and the target variable
-features = ['Age', 'Title', 'Formal Education', 'Coding Experience', 'ML Experience', 'Country']
-target = 'Salary Range'
+# # Select the relevant features and the target variable
+# features = ['Age', 'Title', 'Formal Education', 'Coding Experience', 'ML Experience', 'Country']
+# target = 'Salary Range'
 
-# Preprocess the data by converting categorical variables into numerical representation
-survey_data_encoded = pd.get_dummies(new_df_KNN[features])
+# # Preprocess the data by converting categorical variables into numerical representation
+# survey_data_encoded = pd.get_dummies(new_df_KNN[features])
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(survey_data_encoded, new_df_KNN[target], test_size=0.2, random_state=42)
+# # Split the data into training and testing sets
+# X_train, X_test, y_train, y_test = train_test_split(survey_data_encoded, new_df_KNN[target], test_size=0.2, random_state=42)
 
-# Create the KNN classifier
-knn_classifier = KNeighborsClassifier()
+# # Create the KNN classifier
+# knn_classifier = KNeighborsClassifier()
 
-# Define the parameter grid for grid search
-param_grid = {'n_neighbors': list(range(10, 30, 2))}
+# # Define the parameter grid for grid search
+# param_grid = {'n_neighbors': list(range(10, 30, 2))}
 
-# Perform grid search with cross-validation
-grid_search = GridSearchCV(knn_classifier, param_grid, cv=len(param_grid['n_neighbors']))
-grid_search.fit(X_train, y_train)
+# # Perform grid search with cross-validation
+# grid_search = GridSearchCV(knn_classifier, param_grid, cv=len(param_grid['n_neighbors']))
+# grid_search.fit(X_train, y_train)
 
-# Get the best parameter value and the corresponding classifier
-best_n_neighbors = grid_search.best_params_['n_neighbors']
-best_classifier = grid_search.best_estimator_
+# # Get the best parameter value and the corresponding classifier
+# best_n_neighbors = grid_search.best_params_['n_neighbors']
+# best_classifier = grid_search.best_estimator_
 
-# Make predictions on the test set using the best classifier
-predictions = best_classifier.predict(X_test)
+# # Make predictions on the test set using the best classifier
+# predictions = best_classifier.predict(X_test)
 
-# Evaluate the model using accuracy score
-accuracy = accuracy_score(y_test, predictions)
-print("Best n_neighbors:", best_n_neighbors)
-print("Accuracy:", accuracy)
+# # Evaluate the model using accuracy score
+# accuracy = accuracy_score(y_test, predictions)
+# print("Best n_neighbors:", best_n_neighbors)
+# print("Accuracy:", accuracy)
 
 
 
