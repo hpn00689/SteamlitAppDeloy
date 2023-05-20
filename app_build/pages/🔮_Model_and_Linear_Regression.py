@@ -154,33 +154,35 @@ st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>TẠO MẪU DỮ LIỆU</h3>", unsafe_allow_html=True)
 st.markdown("---", unsafe_allow_html=True)
 
-# ----
+# ----------------------------------------------
 col1, col2, col3 = st.columns(3) 
 
+# ---- Age
 age_choice = col1.selectbox("Tuổi", (df_train["Age"].unique()))
 
 lst_age = df_train["Age"].unique()
 lst_true_model_age = new_df["Age"].unique()
-
-# Compare age_choice with lst_age, get index:
 index = np.where(lst_age == age_choice)[0][0]
 age_choice = lst_true_model_age[index]
 
+# ---- Gender
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 if gender_choice == 'Man':
     gender_choice = 1
 else:
     gender_choice = 2
 
+# ---- Title
+lst_title = df_train["Title"].unique()
+st.write(lst_title)
 title_choice = col3.selectbox("Vị trí/vai trò", (df_train["Title"].unique()))
 lst_title = df_train["Title"].unique()
 lst_true_model_title = new_df["Title"].unique()
 
-# Compare title_choice with lst_title, get index:
 index_title = np.where(lst_title == title_choice)[0][0]
 title_choice = lst_true_model_title[index_title]
 
-
+# ----
 lst_education = df_train["Formal Education"].unique()
 lst_education = np.delete(lst_education, 6)
 education_choice = col1.selectbox("Bằng cấp", lst_education)
@@ -191,7 +193,7 @@ index_education = np.where(lst_education == education_choice)[0][0]
 
 education_choice = lst_true_model_education[index_education]
 
-st.write("index_education:", education_choice)
+# ----
 
 country_choice = col2.selectbox("Quốc gia", (df_train["Country"].unique()))
 
