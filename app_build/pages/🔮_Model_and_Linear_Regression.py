@@ -250,7 +250,22 @@ st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;color:green'>2. BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
 
 st.markdown("Dự đoán các khoảng lương dựa trên mô hình phân lớp KNN", unsafe_allow_html=True)
+st.info(""" **Các cột dữ liệu sử dụng làm feature:**
+- Age: Tuổi
+- Title: Vị trí/vai trò
+- Formal Education: Bằng cấp
+- Coding Experience: Số năm kinh nghiệm lập trình
+- ML Experience: Số năm kinh nghiệm ML
+- Country: Quốc gia
+- Year: Năm.
 
+**Cột dữ liệu sử dụng làm target:**
+- Salary Range: Khoảng lương.
+
+**Mô hình:** K-Nearest Neighbors (KNN) Classifier.
+
+**Độ đo đánh giá mô hình:** Accuracy Score.
+""", icon="ℹ️")
 
 
 # new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
