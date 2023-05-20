@@ -37,7 +37,7 @@ with col3:
 
 # Tiền xử lý dữ liệu -----------------------------------
 df_train = pd.read_csv("app_build/analysis_df_model.csv")
-new_df = df[["Age", "Gender", "Salary", "Title", "Formal Education", "Coding Experience", "ML Experience", "Country", "Year"]]
+new_df = df_train[["Age", "Gender", "Salary", "Title", "Formal Education", "Coding Experience", "ML Experience", "Country", "Year"]]
 
 new_df = new_df.dropna()
 
