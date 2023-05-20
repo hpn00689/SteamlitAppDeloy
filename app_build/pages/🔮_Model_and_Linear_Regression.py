@@ -181,7 +181,10 @@ index_title = np.where(lst_title == title_choice)[0][0]
 title_choice = lst_true_model_title[index_title]
 
 education_choice = col1.selectbox("Bằng cấp", (df_train["Formal Education"].unique()))
+
 lst_education = df_train["Formal Education"].unique()
+lst_education.remove("nan")
+
 lst_true_model_education = new_df["Formal Education"].unique()
 
 # Compare education_choice with lst_education, get index:
