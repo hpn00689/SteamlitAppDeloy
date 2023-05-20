@@ -77,6 +77,41 @@ st.info("""**Nhận xét**:
 - Kết quả cũng không nằm ngoài dự đoán của nhiều người, khi các công ti có quy mô lớn có phúc lợi nhiều hơn các công ti khác, tuy nhiên có một điểm đáng chú ý mà cũng có thể coi là điểm tốt khi không có nhiều sự khác biệt giữa công ti nhỏ và vừa, giúp cho những người đang tìm việc có tâm lý thoải mãi hơn khi chọn lựa giữa các công ti tầm trung và nhỏ.
 """, icon="📝")
 
+df_salary = pd.read_csv('app_build/analysis_title_salary.csv')
+Company_size_L = df_salary[df_salary.company_size == 'L']
+Company_size_M = df_salary[df_salary.company_size == 'M']
+Company_size_S = df_salary[df_salary.company_size == 'S']
+
+fig = make_subplots(rows=1,cols=3,
+                    subplot_titles=("Large","Medium","Small"))
+
+fig.add_trace(go.Histogram(x=Company_size_L.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=1)
+
+fig.add_trace(go.Histogram(x=Company_size_M.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=2)
+
+fig.add_trace(go.Histogram(x=Company_size_S.salary_in_usd,name='',marker = dict(
+            color='LightSkyBlue',
+            line=dict(
+                color='White',
+                width=1
+            )),xbins={'size':30000}),  
+     row=1, col=3)
+
+fig.update_layout(showlegend = False, title_text="Salary at different company sizes")
+st.plotly_chart(fig, use_container_width=True)
+
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("#### 2. Kiểm định mức lương ở các cách thức làm việc khác nhau:")
 
@@ -125,15 +160,14 @@ st.info("""**Nhận xét**:
 - Tuy thế thì cũng phản ánh được một sự cần cân nhắc cho người lao động khi lựa chọn hình thức remote hoàn toàn khi đây có thể coi là 'xu hướng' làm việc của nhiều người lao động hiện tại trong ngành công nghệ.
 """, icon="📝")
 
-df_salary = pd.read_csv('app_build/analysis_title_salary.csv')
-Company_size_L = df_salary[df_salary.company_size == 'L']
-Company_size_M = df_salary[df_salary.company_size == 'M']
-Company_size_S = df_salary[df_salary.company_size == 'S']
+remote_0 = df[df.remote_ratio == 0]
+remote_50 = df[df.remote_ratio == 50]
+remote_100 = df[df.remote_ratio == 100]
 
-fig = make_subplots(rows=1,cols=3,
-                    subplot_titles=("Large","Medium","Small"))
+fig2 = make_subplots(rows=1,cols=3,
+                    subplot_titles=("Offline","Partial remote","Fully remote"))
 
-fig.add_trace(go.Histogram(x=Company_size_L.salary_in_usd,name='',marker = dict(
+fig2.add_trace(go.Histogram(x=remote_0.salary_in_usd,name='',marker = dict(
             color='LightSkyBlue',
             line=dict(
                 color='White',
@@ -141,7 +175,7 @@ fig.add_trace(go.Histogram(x=Company_size_L.salary_in_usd,name='',marker = dict(
             )),xbins={'size':30000}),  
      row=1, col=1)
 
-fig.add_trace(go.Histogram(x=Company_size_M.salary_in_usd,name='',marker = dict(
+fig2.add_trace(go.Histogram(x=remote_50.salary_in_usd,name='',marker = dict(
             color='LightSkyBlue',
             line=dict(
                 color='White',
@@ -149,7 +183,7 @@ fig.add_trace(go.Histogram(x=Company_size_M.salary_in_usd,name='',marker = dict(
             )),xbins={'size':30000}),  
      row=1, col=2)
 
-fig.add_trace(go.Histogram(x=Company_size_S.salary_in_usd,name='',marker = dict(
+fig2.add_trace(go.Histogram(x=remote_100.salary_in_usd,name='',marker = dict(
             color='LightSkyBlue',
             line=dict(
                 color='White',
@@ -157,5 +191,4 @@ fig.add_trace(go.Histogram(x=Company_size_S.salary_in_usd,name='',marker = dict(
             )),xbins={'size':30000}),  
      row=1, col=3)
 
-fig.update_layout(showlegend = False, title_text="Salary at different company sizes")
-st.plotly_chart(fig, use_container_width=True)
+fig2.update_layout(showlegend = False, title_text="Salary at different job types")
