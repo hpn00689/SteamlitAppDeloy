@@ -200,6 +200,7 @@ lst_true_model_country = new_df["Country"].unique()
 index_country = np.where(lst_country == country_choice)[0][0]
 
 country_choice = lst_true_model_country[index_country]
+st.write(country_choice)
 
 # ---- Coding Experience
 coding_exp_choice = col3.selectbox("Số năm kinh nghiệm lập trình", (df_train["Coding Experience"].unique()))
