@@ -107,7 +107,7 @@ y = y.to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # ----
-st.markdown("<h3 style='text-align: center;'>BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>1. BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
 st.write("Dự đoán mức lương của 1 người tham gia trả lời dựa vào 1 số thông tin cá nhân của họ.")
 st.info(""" **Các cột dữ liệu được sử dụng làm feature:**
 - Age: tuổi.
@@ -151,7 +151,7 @@ col2.metric(
 
 # Thử tạo mẫu dữ liệu -----------------------------------
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>TẠO MẪU DỮ LIỆU</h3>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>TẠO MẪU DỮ LIỆU</h4>", unsafe_allow_html=True)
 st.markdown("---", unsafe_allow_html=True)
 
 # ----------------------------------------------
@@ -234,7 +234,7 @@ data_point = [age_choice, gender_choice, title_choice, education_choice, coding_
 
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>DỰ ĐOÁN</h4>", unsafe_allow_html=True)
 
 col1_value, col2_value = st.columns(2)
 
@@ -246,8 +246,12 @@ col2_value.metric(
 )
 
 # ----
-# st.markdown("---", unsafe_allow_html=True)
-# st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP</h3>", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
+
+st.markdown("Dự đoán các khoảng lương dựa trên mô hình phân lớp KNN", unsafe_allow_html=True)
+
+
 
 # new_df_KNN = df[df["Country"] != "Russia🇷🇺"]
 # new_df_KNN = df[df["Country"] != "Australia🇦🇺"]
