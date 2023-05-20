@@ -186,6 +186,7 @@ lst_education = df_train["Formal Education"].unique()
 lst_education = np.delete(lst_education, np.where(lst_education == "nan"))
 
 lst_true_model_education = new_df["Formal Education"].unique()
+st.write("lst_true_model_education:", lst_true_model_education)
 
 # Compare education_choice with lst_education, get index:
 index_education = np.where(lst_education == education_choice)[0][0]
