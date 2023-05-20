@@ -102,7 +102,7 @@ y = new_df["Salary"]
 
 X = X.to_numpy()
 y = y.to_numpy()
-y = zscore(y)
+# y = zscore(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -230,13 +230,14 @@ year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 #---- Lấy dữ liệu từ tất cả lựa chọn:
 
 data_point = [age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice]
-st.write(data_point[0])
 
 
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
 
+st.markdown("#### Mức lương người đó nhận được theo sự lựa chọn của bạn: ", unsafe_allow_html=True)
+st.markdown("#### **{}**".format(round(linear_model.predict([data_point])[0], 3)), unsafe_allow_html=True)
 # ----
 # st.markdown("---", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP</h3>", unsafe_allow_html=True)
