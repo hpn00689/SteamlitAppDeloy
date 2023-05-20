@@ -192,7 +192,7 @@ st.write("lst_true_model_education:", lst_true_model_education)
 index_education = np.where(lst_education == education_choice)[0][0]
 education_choice = lst_true_model_education[index_education]
 
-st.write("index_education:", education_choice)
+st.write("index_education:", lst_education)
 
 country_choice = col2.selectbox("Quốc gia", (df_train["Country"].unique()))
 
