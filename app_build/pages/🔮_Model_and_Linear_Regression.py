@@ -192,10 +192,16 @@ index_education = np.where(lst_education == education_choice)[0][0]
 
 education_choice = lst_true_model_education[index_education]
 
-# ----
+# ---- Country
+lst_country = df_train["Country"].unique()
+country_choice = col2.selectbox("Quốc gia", lst_country)
 
-country_choice = col2.selectbox("Quốc gia", (df_train["Country"].unique()))
+lst_true_model_country = new_df["Country"].unique()
+index_country = np.where(lst_country == country_choice)[0][0]
 
+country_choice = lst_true_model_country[index_country]
+
+# ---- Coding Experience
 coding_exp_choice = col3.selectbox("Số năm kinh nghiệm lập trình", (df_train["Coding Experience"].unique()))
 
 ml_exp_choice = col1.selectbox("Số năm kinh nghiệm ML", (df_train["ML Experience"].unique()))
