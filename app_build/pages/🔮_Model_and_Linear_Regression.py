@@ -174,8 +174,9 @@ else:
 
 # ---- Title
 lst_title = df_train["Title"].unique()
-st.write(lst_title)
-title_choice = col3.selectbox("Vị trí/vai trò", (df_train["Title"].unique()))
+lst_title = np.delete(lst_title, 13)
+
+title_choice = col3.selectbox("Vị trí/vai trò", (lst_title))
 lst_title = df_train["Title"].unique()
 lst_true_model_title = new_df["Title"].unique()
 
