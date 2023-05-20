@@ -236,8 +236,11 @@ data_point = [age_choice, gender_choice, title_choice, education_choice, coding_
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;'>DỰ ĐOÁN</h3>", unsafe_allow_html=True)
 
-st.markdown("#### Mức lương người đó nhận được theo sự lựa chọn của bạn: ", unsafe_allow_html=True)
-st.metric(
+col1_value, col2_value = st.columns(2)
+
+col1.markdown("#### Mức lương người đó nhận được theo sự lựa chọn của bạn: ", unsafe_allow_html=True)
+
+col2.metric(
     label="Mức lương:",
     value=round(linear_model.predict([data_point])[0], 3),
 )
