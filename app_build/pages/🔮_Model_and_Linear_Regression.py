@@ -107,7 +107,7 @@ y = y.to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # ----
-st.markdown("<h3 style='text-align: center;'>1. BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color:green'>1. BÀI TOÁN HỒI QUY</h3>", unsafe_allow_html=True)
 st.write("Dự đoán mức lương của 1 người tham gia trả lời dựa vào 1 số thông tin cá nhân của họ.")
 st.info(""" **Các cột dữ liệu được sử dụng làm feature:**
 - Age: tuổi.
@@ -247,7 +247,7 @@ col2_value.metric(
 
 # ----
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>2. BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;color:green'>2. BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
 
 st.markdown("Dự đoán các khoảng lương dựa trên mô hình phân lớp KNN", unsafe_allow_html=True)
 
