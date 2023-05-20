@@ -158,9 +158,14 @@ st.markdown("---", unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3) 
 
 age_choice = col1.selectbox("Tuổi", (df_train["Age"].unique()))
-age_choice = age_choice.replace("+", "")
-st.write(age_choice)
 
+lst_age = df_train["Age"].unique()
+lst_true_model_age = new_df["Age"].unique()
+
+# Compare age_choice with lst_age, get index:
+index = np.where(lst_age == age_choice)[0][0]
+age_choice = lst_true_model_age[index]
+st.write(age_choice)
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
