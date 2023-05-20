@@ -157,7 +157,7 @@ st.markdown("---", unsafe_allow_html=True)
 # ----
 col1, col2, col3 = st.columns(3) 
 
-age_choice = col1.slider("Tuổi", min_value=18, max_value=60, value=30, step=1) 
+age_choice = col1.selectbox("Tuổi", (new_df["Age"].unique()))
 
 gender_choice = col2.radio("Giới tính", ("Man", "Woman")) 
 
