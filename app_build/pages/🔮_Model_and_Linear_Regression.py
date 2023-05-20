@@ -211,7 +211,6 @@ lst_true_model_coding_exp = new_df["Coding Experience"].unique()
 index_coding_exp = np.where(lst_coding_exp == coding_exp_choice)[0][0]
 
 coding_exp_choice = lst_true_model_coding_exp[index_coding_exp]
-st.write(coding_exp_choice)
 
 # ---- ML Experience
 lst_ml_exp = df_train["ML Experience"].unique()
@@ -228,8 +227,10 @@ ml_exp_choice = lst_true_model_ml_exp[index_ml_exp]
 
 year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
-#----
-# Lấy dữ liệu từ người dùng đã nhập:
+#---- Lấy dữ liệu từ tất cả lựa chọn:
+
+data_point = [age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice]
+st.write(data_point)
 
 
 #----------------------------------------------------------
