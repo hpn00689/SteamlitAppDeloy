@@ -176,18 +176,16 @@ else:
 lst_title = df_train["Title"].unique()
 lst_title = np.delete(lst_title, 13)
 
-title_choice = col3.selectbox("Vị trí/vai trò", (lst_title))
-lst_title = df_train["Title"].unique()
+title_choice = col3.selectbox("Vị trí/vai trò", lst_title)
 lst_true_model_title = new_df["Title"].unique()
 
 index_title = np.where(lst_title == title_choice)[0][0]
 title_choice = lst_true_model_title[index_title]
-
-# ----
+  
+# ---- Education
 lst_education = df_train["Formal Education"].unique()
 lst_education = np.delete(lst_education, 6)
 education_choice = col1.selectbox("Bằng cấp", lst_education)
-
 
 lst_true_model_education = new_df["Formal Education"].unique()
 index_education = np.where(lst_education == education_choice)[0][0]
