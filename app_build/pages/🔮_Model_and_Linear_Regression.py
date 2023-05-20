@@ -247,7 +247,7 @@ col2_value.metric(
 
 # ----
 st.markdown("---", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>2. BÀI TOÁN PHÂN LỚP KNN</h3>", unsafe_allow_html=True)
 
 st.markdown("Dự đoán các khoảng lương dựa trên mô hình phân lớp KNN", unsafe_allow_html=True)
 
