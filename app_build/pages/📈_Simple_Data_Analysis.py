@@ -33,8 +33,8 @@ with col3:
 # Giá trị - Các biến quan sát -------------------------
 st.markdown("#### 1. Kiểm định mức lương ở các công ty:")
 st.info(""" **Giả thiết**: 
-- H0: Mức lương chi trả ở các công ty có quy mô khác nhau thì khác nhau.
-- H1: các công ty có quy mô khác nhau vẫn có mức chi trả giống nhau.
+- H0: Mức lương là như nhau ở mọi quy mô công ty.
+- H1: Mức lương khác nhau tùy theo quy mô công ti.
 - Mức ý nghĩa: alpha = 0.05.
 
 **Cách thực hiện**: Vì số mẫu tại các tập đều lớn hơn 30, nên ta sử dụng z-test.
@@ -70,8 +70,12 @@ col3.metric(
     value=0.7570,
 )
 
-st.info("""**Nhận xét**: 
-- p_value < alpha tại các trường hợp công ti có quy mô lớn (L), và p_value > alpha tại trường hợp công ti nhỏ (S) và trung bình (M), khẳng định có sự khác nhau giữa công ti có quy mô lớn với các quy mô khác, trong khi không có sự khác biệt giữa công ti nhỏ và vừa.
+st.info("""**Nhận xét**: Thực nghiệp theo kiểm định z-test từng cặp ta có:
+- p-value(Large, Medium) = 0.336 < alpha.
+- p-value(Large, Small) = 0.129 < alpha.
+- p-value(Small, Medium) = 0.757 > alpha.
+
+Chỉ có sự khác nhau ở công ty có quy mô lớn, các quy mô công ty còn lại thì mức lương có mặt bằng khá giống nhau.
 
 **Kết luận:**
 - Kết quả cũng không nằm ngoài dự đoán của nhiều người, khi các công ti có quy mô lớn có phúc lợi nhiều hơn các công ti khác, tuy nhiên có một điểm đáng chú ý mà cũng có thể coi là điểm tốt khi không có nhiều sự khác biệt giữa công ti nhỏ và vừa, giúp cho những người đang tìm việc có tâm lý thoải mãi hơn khi chọn lựa giữa các công ti tầm trung và nhỏ.
@@ -116,8 +120,8 @@ st.markdown("---", unsafe_allow_html=True)
 st.markdown("#### 2. Kiểm định mức lương ở các cách thức làm việc khác nhau:")
 
 st.info(""" **Giả thiết**:
-- H0: Có sự khác biệt giữa mức lương ở các hình thức làm việc.
-- H1: Hình thức làm việc không ảnh hưởng đến lương.
+- H0: Mức lương là như nhau ở mọi hình thức làm việc.
+- H1: Mức lương khác nhau tùy theo hình thức làm việc.
 - Mức ý nghĩa: alpha =  0.05.
 
 **Cách thực hiện:** Số mẫu tại các tập đều lớn hơn 30, nên tả sử dụng z-test""", icon="ℹ️")
@@ -152,8 +156,13 @@ col6.metric(
     value=0.0030,
 )
 
-st.info("""**Nhận xét**:
-- p_value < alpha tại các trường hợp làm việc remote hoàn toàn (100%), và p_value > alpha tại trường hợp không làm việc remote (0%) và làm việc kết hợp remote (50%). Khẳng định rằng mức lương sẽ có một sự khác biệt khi ta muốn làm việc remote hoàn toàn.
+st.info("""**Nhận xét**: Thực nghiệp theo kiểm định z-test từng cặp ta có:
+- p-value(Offline, PartialRemote = 0.7032 > alpha.
+- p-value(Offline, FullyRemote) = 0.0611 > alpha.
+- p-value(PartialRemote, FullyRemote) = 0.0030 < alpha.
+
+ở đây tuy rằng p-value(Offline, FullyRemote) > alpha, nhưng giá trị này cũng khá gần alpha, nên theo ý kiến các nhân tuy ý giả thiết lúc này bị bác bỏ, nhưng ta vẫn thấy được rằng công việc với nhu cầu làm full remote có một sự khác biệt gì đó với các hình thức khác về chế độ lương.
+
 
 **Kết luận**:
 - Kết quả đưa ra không quá ngạc nhiên khi môi trường remote hoàn toàn có mức lương khác hẳn các hình thức làm việc truyền thống. 

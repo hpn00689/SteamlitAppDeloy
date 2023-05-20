@@ -3,4 +3,3 @@ pandas
 statsmodels
 scipy
 scikit-learn
-pingouin
