@@ -237,7 +237,9 @@ year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
 data_point = np.array([age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice])
 data_point = data_point.reshape(1, -1)
+pred = linear_model.predict(data_point)
 
+value_predict = pred[0] * std + mean
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>DỰ ĐOÁN</h4>", unsafe_allow_html=True)
@@ -248,7 +250,7 @@ col1_value.markdown("#### Mức lương người đó nhận được theo sự 
 
 col2_value.metric(
     label="Mức lương:",
-    value=linear_model.predict(data_point),
+    value=value_predict,
 )
 
 # ----
