@@ -235,7 +235,7 @@ year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 
 #---- Lấy dữ liệu từ tất cả lựa chọn:
 
-data_point =  np.array([age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice])
+data_point = np.array([age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice])
 data_point = data_point.reshape(1, -1)
 
 #----------------------------------------------------------
@@ -248,7 +248,7 @@ col1_value.markdown("#### Mức lương người đó nhận được theo sự 
 
 col2_value.metric(
     label="Mức lương:",
-    value=round(linear_model.predict(data_point), 3),
+    value=linear_model.predict(data_point),
 )
 
 # ----
