@@ -250,7 +250,7 @@ col1_value.markdown("#### Mức lương người đó nhận được theo sự 
 
 col2_value.metric(
     label="Mức lương:",
-    value=value_predict,
+    value=round(value_predict, 2),
 )
 
 # ----
