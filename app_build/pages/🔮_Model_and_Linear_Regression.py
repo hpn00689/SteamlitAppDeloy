@@ -243,7 +243,7 @@ value_predict = pred[0] * std + mean
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>DỰ ĐOÁN</h4>", unsafe_allow_html=True)
-
+st.markdown("<h5 style='text-align: center;'>Note: Bạn phải chọn các thông số từ điểm dữ liệu trên. </h5>", unsafe_allow_html=True)
 col1_value, col2_value = st.columns(2)
 
 col1_value.markdown("#### Mức lương người đó nhận được theo sự lựa chọn của bạn: ", unsafe_allow_html=True)
