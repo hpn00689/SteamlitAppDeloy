@@ -100,9 +100,15 @@ new_df["Country"] = new_df["Country"].map(country_map)
 X = new_df.drop("Salary", axis=1)
 y = new_df["Salary"]
 
+from sklearn.preprocessing import MinMaxScaler
+
 X = X.to_numpy()
 y = y.to_numpy()
-# y = zscore(y)
+mean = np.mean(y)
+std = np.std(y)
+scaler = MinMaxScaler()
+scaler.fit(y.reshape(-1, 1))
+y = scaler.transform(y.reshape(-1, 1))
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -230,7 +236,7 @@ year_choice = col2.selectbox("Năm", (df_train["Year"].unique()))
 #---- Lấy dữ liệu từ tất cả lựa chọn:
 
 data_point = [age_choice, gender_choice, title_choice, education_choice, coding_exp_choice, ml_exp_choice, country_choice, year_choice]
-
+data_point = data_point.reshape(1, -1)
 
 #----------------------------------------------------------
 st.markdown("---", unsafe_allow_html=True)
@@ -242,7 +248,7 @@ col1_value.markdown("#### Mức lương người đó nhận được theo sự 
 
 col2_value.metric(
     label="Mức lương:",
-    value=round(linear_model.predict([data_point])[0], 3),
+    value=round(linear_model.predict(data_point), 3),
 )
 
 # ----
